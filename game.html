@@ -41,6 +41,8 @@
     <script>
         const words = [
 
+        //part 1
+
         { "de": "die Freizeit", "lt": "laisvalaikis" },
     { "de": "der Sport", "lt": "sportas" },
     { "de": "joggen", "lt": "bėgioti" },
@@ -65,6 +67,45 @@
     { "de": "Ski fahren", "lt": "važinėtis slidėmis" },
     { "de": "kochen", "lt": "virti, gaminti" },
     { "de": "backen", "lt": "kepti" }, 
+
+    //part 2
+    { "de": "der Kuchen", "lt": "pyragas" },
+    { "de": "schreiben", "lt": "rašyti" },
+    { "de": "das Gedicht", "lt": "eilėraštis" },
+    { "de": "basteln", "lt": "meistrauti" },
+    { "de": "reisen", "lt": "keliauti" },
+    { "de": "die Reise", "lt": "kelionė" },
+    { "de": "der Urlaub", "lt": "atostogos" },
+    { "de": "zelten", "lt": "iškilauti su palapinėmis" },
+    { "de": "der Campingplatz", "lt": "kempingo aikštelė, kempingas" },
+    { "de": "angeln", "lt": "žvejoti" },
+    { "de": "der See", "lt": "ežeras" },
+    { "de": "spazieren gehen", "lt": "eiti pasivaikščioti" },
+    { "de": "reiten", "lt": "jodinėti" },
+    { "de": "das Pferd", "lt": "arklys" },
+    { "de": "der Zoo", "lt": "zoologijos sodas" },
+    { "de": "der Lieblingsfilm", "lt": "mėgstamiausias filmas" },
+    { "de": "fernsehen", "lt": "žiūrėti televizorių" },
+    { "de": "ins Theater gehen", "lt": "eiti į teatrą" },
+    { "de": "ins Museum", "lt": "eiti į muziejų" },
+    { "de": "das Handy", "lt": "mobilusis telefonas" },
+    { "de": "die Natur", "lt": "gamta" },
+    { "de": "die Tiere", "lt": "gyvūnai" },
+    { "de": "die Pflanzen", "lt": "augalai" },
+    { "de": "der Garten", "lt": "sodas" },
+    { "de": "die Blume", "lt": "gėlė" },
+    { "de": "der Hund", "lt": "šuo" },
+    { "de": "die Katze", "lt": "katė" },
+    { "de": "der Vogel", "lt": "paukštis" },
+    { "de": "das Haustier", "lt": "naminis gyvūnas" },
+    { "de": "das Aquarium", "lt": "akvariumas" },
+    { "de": "das Konzert", "lt": "koncertas" },
+    { "de": "der Tanzkurs", "lt": "šokių būrelis" },
+    { "de": "der Malkurs", "lt": "piešimo būrelis" },
+    { "de": "der Kochkurs", "lt": "gaminimo būrelis" },
+    { "de": "der Spaziergang", "lt": "pasmas pasivaikščioti" },
+    { "de": "die Wanderung", "lt": "žygis" }
+
 
     //   { "de": "spannend", "lt": "įdomus" },
     // { "de": "langweilig", "lt": "nuobodus" },
@@ -129,8 +170,11 @@
 
         function helpMe() {
             document.getElementById("answer").style.display = "none";
-            let options = [currentWord.de, ...words.map(w => w.de).filter(w => w !== currentWord.de)];
-            options = options.sort(() => 0.5 - Math.random()).slice(0, 3);
+            let options = [...words.map(w => w.de).filter(w => w !== currentWord.de)];
+            options = options.sort(() => 0.5 - Math.random()).slice(0, 4);
+            options = [currentWord.de, ...options];
+            options = options.sort(() => 0.5 - Math.random());
+
             document.getElementById("helpOptions").innerHTML = "";
             options.forEach(option => {
                 let btn = document.createElement("button");
@@ -143,10 +187,8 @@
         }
 
         function selectHelpOption(option) {
-            if (option === currentWord.de) {
-                score += 0.5;
-            }
-            nextRound();
+            document.getElementById("answer").value = option;
+            checkAnswer();
         }
 
         function nextRound() {
